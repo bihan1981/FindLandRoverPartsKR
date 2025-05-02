@@ -6,15 +6,23 @@ import webbrowser
 import urllib.parse
 import json
 import urllib3
+import os
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout, QLineEdit,
     QPushButton, QListWidget, QTextEdit, QLabel, QComboBox, QMessageBox, QFrame
 )
 from PyQt5.QtGui import QIcon
-
 from bs4 import BeautifulSoup
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+
+def resource_path(relative_path):
+    """PyInstaller 빌드에서도 리소스 파일 경로 인식"""
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
+
 
 class MainWindow(QWidget):
     BASE_URL = "https://kr.landroverkorea.co.kr:6443/parts-info/parts_list.asp"
@@ -23,8 +31,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("FindLandRoverPartsKR")
-        # 아이콘
-        self.setWindowIcon(QIcon('landrover_tad_icon.ico'))
+        self.setWindowIcon(QIcon(resource_path('landrover_tad_icon.ico')))
         self.resize(800, 600)
 
         self.stop_event = threading.Event()
@@ -34,17 +41,14 @@ class MainWindow(QWidget):
         self.init_ui()
 
     def load_options(self):
-        """JSON 옵션 파일 로드"""
-        with open("options.json", "r", encoding="utf-8") as f:
+        """JSON 옵션 파일 로드 (빌드된 exe에서도 경로 문제없게)"""
+        options_path = resource_path("options.json")
+        with open(options_path, "r", encoding="utf-8") as f:
             options = json.load(f)
         self.car_models = options["car_models"]
         self.parts_groups = options["parts_groups"]
 
     def init_ui(self):
-
-
-        """UI 초기화"""
-
         layout = QVBoxLayout()
 
         # 차량 선택
@@ -52,7 +56,6 @@ class MainWindow(QWidget):
         car_label = QLabel("<font color='red'>*</font> 차량 선택:")
         self.car_combo = QComboBox()
         self.car_combo.addItems(self.car_models)
-        # 기본값 'DEFENDER (L663)' 선택
         if "DEFENDER (L663)" in self.car_models:
             index = self.car_models.index("DEFENDER (L663)")
             self.car_combo.setCurrentIndex(index)
@@ -86,36 +89,30 @@ class MainWindow(QWidget):
 
         layout.addLayout(input_layout)
 
-        # 검색 시작 버튼 시그널 연결
         self.search_input.textChanged.connect(self.toggle_start_button)
-        self.start_button.setEnabled(False)  # 초기에는 비활성화 상태
+        self.start_button.setEnabled(False)
 
-        # 진행 상태 표시
         self.status_label = QLabel("페이지 검색이 준비되었습니다. 검색 시작 시 진행정도를 표시합니다.")
         layout.addWidget(self.status_label)
 
-        # ✅ 구분선 추가
         line1 = QFrame()
         line1.setFrameShape(QFrame.HLine)
         line1.setFrameShadow(QFrame.Sunken)
         layout.addWidget(line1)
 
-        #검색 결과 창 라벨
         self.link_info_label = QLabel("링크를 클릭하면 해당 페이지를 열람합니다.")
         self.link_info_label.setStyleSheet("color: gray; font-size: 8pt;")
         layout.addWidget(self.link_info_label)
-        # 검색 결과 리스트
+
         self.result_list = QListWidget()
         self.result_list.itemDoubleClicked.connect(self.open_url)
         layout.addWidget(self.result_list)
 
-        # ✅ 구분선 추가
         line2 = QFrame()
         line2.setFrameShape(QFrame.HLine)
         line2.setFrameShadow(QFrame.Sunken)
         layout.addWidget(line2)
 
-        # 로그 출력
         self.log_output = QTextEdit()
         self.log_output.setReadOnly(True)
         layout.addWidget(self.log_output)
@@ -126,11 +123,9 @@ class MainWindow(QWidget):
         self.start_button.setEnabled(bool(text.strip()))
 
     def log(self, message):
-        """로그 출력"""
         self.log_output.append(message)
 
     def start_search(self):
-        """검색 시작"""
         car_model = self.car_combo.currentText()
         parts_group = self.group_combo.currentText()
         search_term = self.search_input.text().strip()
@@ -161,7 +156,6 @@ class MainWindow(QWidget):
         ).start()
 
     def stop_search(self):
-        """검색 중단"""
         self.stop_event.set()
         self.log("🛑 검색 중단 요청됨")
 
@@ -189,7 +183,6 @@ class MainWindow(QWidget):
                     self.status_label.setText(f"검색 완료 (총 {page - 1} 페이지)")
                     break
 
-                # HTML 파싱
                 soup = BeautifulSoup(content, 'html.parser')
                 rows = soup.select('tbody tr')
 
@@ -232,9 +225,9 @@ class MainWindow(QWidget):
         self.log("🔍 검색 루프 종료")
 
     def open_url(self, item):
-        """검색 결과 클릭 시 URL 열기"""
         url = item.text().split(": ", 1)[1]
         webbrowser.open(url)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

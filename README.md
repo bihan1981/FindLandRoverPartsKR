@@ -92,7 +92,7 @@ pip install pyinstaller
 2. 빌드 실행:
 
 ```bash
-pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico search_app.py
+pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico --add-data "options.json;." search_app.py
 
 ```
 
@@ -107,7 +107,8 @@ pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico search_app.py
 ---
 
 ## Screenshot
-![screenshot](screenshot.jpg)
+![part number](screenshot.jpg)
+![part name](screenshot_partname.jpg)
 
 ---
 
