@@ -27,6 +27,32 @@ A tool to search Land Rover Korea parts price by part number or name.
 
 ---
 
+---
+
+## Virtual Environment (Recommended)
+
+It is recommended to use a **virtual environment** to avoid conflicts with global Python packages.
+
+To create and activate a virtual environment:
+
+```bash
+### Create virtual environment
+python -m venv venv
+```
+
+### Activate (Windows PowerShell)
+```bash
+.\venv\Scripts\Activate
+```
+### Activate (Windows CMD)
+```bash
+venv\Scripts\activate.bat
+```
+### Activate (Mac/Linux)
+```bash
+source venv/bin/activate
+```
+---
 ## Installation
 
 먼저 필요 모듈을 설치합니다:
