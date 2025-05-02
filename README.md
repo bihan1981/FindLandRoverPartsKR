@@ -8,11 +8,13 @@ A tool to search Land Rover Korea parts price by part number or name.
 
 ## Features
 
-- Search Land Rover Korea parts price by part number or part name
-- Shows found pages and URLs
-- Open part page in default browser by double-clicking result
-- Progress bar and log output
-- Stop search anytime with a button
+- Vehicle selection → checks if stored data is up-to-date
+- Admin-only **data collection** (requires PIN authentication)
+- Local JSON data search → fast search without server crawling
+- Search by part number or part name
+- Shows search results with part number, part name, price
+- Open original part page in browser by double-click
+- Log output with status messages
 
 ---
 
@@ -21,11 +23,10 @@ A tool to search Land Rover Korea parts price by part number or name.
 - Python 3.8 or higher
 - PyQt5
 - requests
+- beautifulsoup4
 - urllib3
 
 설치할 패키지는 `requirements.txt`에 포함되어 있습니다.
-
----
 
 ---
 
@@ -33,29 +34,30 @@ A tool to search Land Rover Korea parts price by part number or name.
 
 It is recommended to use a **virtual environment** to avoid conflicts with global Python packages.
 
-To create and activate a virtual environment:
-
 ```bash
-### Create virtual environment
 python -m venv venv
 ```
 
 ### Activate (Windows PowerShell)
 ```bash
-.\venv\Scripts\Activate
+venv\Scripts\Activate
 ```
+
 ### Activate (Windows CMD)
 ```bash
-venv\Scripts\activate.bat
+venv\Scriptsctivate.bat
 ```
+
 ### Activate (Mac/Linux)
 ```bash
 source venv/bin/activate
 ```
+
 ---
+
 ## Installation
 
-먼저 필요 모듈을 설치합니다:
+필요 모듈 설치:
 
 ```bash
 pip install -r requirements.txt
@@ -72,10 +74,14 @@ python search_app.py
 ```
 
 1. 프로그램을 실행합니다.
-2. 검색어(부품번호나 부품명)를 입력합니다.
-3. **[검색 시작]** 버튼 클릭
-4. 검색 도중 필요시 **[검색 중단]** 버튼 클릭
-5. 결과 리스트에서 원하는 페이지 더블클릭 → 웹 브라우저로 열림
+2. 차량을 선택하면 저장된 데이터의 최신 여부를 자동으로 확인합니다.
+3. **최신 데이터가 없거나 업데이트 필요 시 → [데이터 수집] 버튼 활성화**
+4. **[데이터 수집] 버튼 클릭 시 관리자용PIN 입력 → 올바른 PIN 입력 시 데이터 수집 시작**
+5. 데이터 수집 완료 후 최신 데이터로 검색 가능
+6. 검색어 입력 후 **[검색]** 버튼 클릭
+7. 검색 결과 더블클릭 → 웹 브라우저로 원본 페이지 열람
+
+⚠️ **일반 사용자는 데이터 수집이 필요 없습니다.(미리 받아두었습니다)** 
 
 ---
 
@@ -83,30 +89,22 @@ python search_app.py
 
 Windows에서 단일 실행파일(`.exe`)로 빌드하려면:
 
-1. PyInstaller 설치:
-
 ```bash
-pip install pyinstaller
-```
-
-2. 빌드 실행:
-
-```bash
-pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico --add-data "options.json;." search_app.py
-
+pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico --add-data "options.json;." --add-data "data;data" search_app.py
 ```
 
 - `--onefile`: 단일 exe 생성
 - `--windowed`: 콘솔창 숨김
 - `--icon`: 앱 아이콘 지정 (선택사항)
+- `--add-data "data;data"`: `data` 폴더 전체 포함
+- `--add-data "options.json;."`: options.json 포함
 
 빌드 후 `dist/` 폴더에 `search_app.exe`가 생성됩니다.
-
-※ `assets/app.ico`는 아이콘 경로이며 필요시 직접 아이콘 파일 추가하세요.
 
 ---
 
 ## Screenshot
+
 ![part number](screenshot.jpg)
 ![part name](screenshot_partname.jpg)
 
@@ -116,3 +114,4 @@ pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico --add-data "optio
 
 This project is licensed under the MIT License.  
 자유롭게 사용, 수정, 배포 가능합니다.
+
