@@ -92,7 +92,8 @@ pip install pyinstaller
 2. 빌드 실행:
 
 ```bash
-pyinstaller --onefile --windowed --icon=assets/app.ico search_app.py
+pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico search_app.py
+
 ```
 
 - `--onefile`: 단일 exe 생성
