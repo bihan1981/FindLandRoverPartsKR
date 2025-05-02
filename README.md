@@ -104,7 +104,8 @@ pyinstaller --onefile --windowed --icon=landrover_tad_icon.ico --add-data "optio
 ---
 
 ## Screenshot
-
+![part number](screenshot.jpg)
+![part name](screenshot_partname.jpg)
 
 ---
 
