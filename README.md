@@ -20,7 +20,7 @@ A tool to search Land Rover Korea parts price by part number or name.
 - Search Land Rover Korea parts price by part number or part name
 - Shows found pages and URLs
 - Open part page in default browser by double-clicking result
-- Progress bar and log output
+- Progress page search log output
 - Stop search anytime with a button
 
 ---
