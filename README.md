@@ -30,6 +30,7 @@ A tool to search Land Rover Korea parts price by part number or name.
 - Python 3.8 or higher
 - PyQt5
 - requests
+- beautifulsoup4
 - urllib3
 
 설치할 패키지는 `requirements.txt`에 포함되어 있습니다.
