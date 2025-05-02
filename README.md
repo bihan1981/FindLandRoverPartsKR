@@ -106,7 +106,7 @@ pyinstaller --onefile --windowed --icon=assets/app.ico search_app.py
 ---
 
 ## Screenshot
-
+![screenshot](screenshot.jpg)
 
 ---
 

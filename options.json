@@ -1,0 +1,35 @@
+{
+  "car_models": [
+    "RANGE ROVER (L322)",
+    "RANGE ROVER (L460)",
+    "NEW RANGE ROVER (L405)",
+    "RANGE ROVER P38A (L321)",
+    "RANGE ROVER CLASSIC BB (SRVC)",
+    "RANGE ROVER CLASSIC BD (SRVC)",
+    "RANGE ROVER EVOQUE (L538)",
+    "RANGE ROVER SPORT (L320)",
+    "RANGE ROVER SPORT (L461)",
+    "NEW RANGE ROVER SPORT (L494)",
+    "NEW EVOQUE (L551)",
+    "4th RANGE ROVER - VELAR",
+    "DEFENDER (L316)",
+    "DEFENDER (L316) - 2007 MY",
+    "DEFENDER (L663)",
+    "DISCOVERY (L462)",
+    "DISCOVERY 1 (SRVC)",
+    "DISCOVERY 2 (L318)",
+    "DISCOVERY 3 (L319)",
+    "DISCOVERY SPORT",
+    "FREELANDER (L314)",
+    "FREELANDER (L359)",
+    "MULTI VEHICLE"
+  ],
+  "parts_groups": [
+    "Accessories",
+    "Body & Trim",
+    "Extended Service",
+    "Major Repair",
+    "Routine Service",
+    "Wear & Tear"
+  ]
+}
