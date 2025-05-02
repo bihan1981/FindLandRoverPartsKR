@@ -5,6 +5,15 @@ A tool to search Land Rover Korea parts price by part number or name.
 (부품번호나 부품명으로 한국 랜드로버 부품 가격을 검색하는 툴)
 
 ---
+# <font color="red"><b>주의사항</b></font>
+
+1. 이 프로그램은 Land Rover Korea의 공식 허가를 받은 검색 툴이 아닙니다.
+2. 검색 시 가급적 **부품 그룹을 선택하여 검색 범위를 좁혀** 사용해 주세요.
+3. 검색이 완료되었다면 **반드시 '검색 중단' 버튼을 눌러 검색을 중지**해 주세요.
+
+※ 모든 검색 요청은 Land Rover Korea 웹 서비스에 부하를 줄 수 있으며,  
+지속적인 사용 시 서비스 접근이 제한될 가능성이 있습니다.
+---
 
 ## Features
 
